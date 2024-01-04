@@ -1,0 +1,33 @@
+from forex_python.converter import CurrencyRates
+
+def get_exchange_rate(source_currency, target_currency):
+    c = CurrencyRates()
+    return c.get_rate(source_currency, target_currency)
+
+def convert_currency(amount, exchange_rate):
+    return amount * exchange_rate
+
+def main():
+    print("Welcome to the Currency Converter!")
+
+    try:
+        source_currency = input("Enter the source currency code: ").upper()
+        target_currency = input("Enter the target currency code: ").upper()
+
+        amount = float(input("Enter the amount to convert: "))
+
+        exchange_rate = get_exchange_rate(source_currency, target_currency)
+        converted_amount = convert_currency(amount, exchange_rate)
+
+        print(f"\n{amount} {source_currency} is equal to {converted_amount:.2f} {target_currency}")
+        print(f"Exchange rate used: {exchange_rate:.4f}")
+
+    except ValueError:
+        print("Invalid input. Please enter a valid numeric amount.")
+    except KeyError:
+        print("Invalid currency code. Please enter a valid currency code.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+if _name_ == "_main_":
+    main()
